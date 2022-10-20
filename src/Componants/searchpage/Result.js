@@ -11,7 +11,7 @@ function Result() {
   let [filter, setfilter] = useState({ meal_type: meal_id });
 
   let getLocationList = async () => {
-    let Result = await axios.get("http://localhost:3001/api/get-Location");
+    let Result = await axios.get("https://zomato-db-api.herokuapp.com/api/get-Location");
     let data = Result.data;
 
     if (data.status === true) {
@@ -23,7 +23,7 @@ function Result() {
 
   let filterOperation = async (filter) => {
     try {
-      let url = `http://localhost:3001/api/filter`;
+      let url = `https://zomato-db-api.herokuapp.com/api/filter`;
       let responce = await axios.post(url, filter);
       let { data } = responce;
 

@@ -11,7 +11,7 @@ function Wallpaper() {
   let [RestaurantTab , setRestaurantTab] = useState([])
 
   let getLocationList = async () => {
-    let Result = await axios.get("http://localhost:3001/api/get-Location");
+    let Result = await axios.get("https://zomato-db-api.herokuapp.com/api/get-Location");
     let data = Result.data;
 
     if (data.status === true) {
@@ -24,7 +24,7 @@ function Wallpaper() {
     let value = event.target.value;
     if (value !== "Select Location") {
       try {
-        let Url = `http://localhost:3001/api/get-Restaurant-by-location-id/${value}`;
+        let Url = `https://zomato-db-api.herokuapp.com/api/get-Restaurant-by-location-id/${value}`;
 
         let { data } = await axios.get(Url);
         if (data.status === true) {
