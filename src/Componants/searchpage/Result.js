@@ -69,6 +69,7 @@ function Result() {
       case "cuisine":
         _filter["cuisine"] = Number(value)
         console.log(_filter);
+  
     }
 
     setfilter({ ..._filter });

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Swal from 'sweetalert2'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 function Restaurantpage() {
   let [tab, setTab] = useState(1);
@@ -162,9 +164,32 @@ function Restaurantpage() {
 
   useEffect(() => {
     getRestaurant();
-  }, []);
+  },[]);
   return (
     <>
+    <div
+        className="modal fade"
+        id="slideShow"
+        tabIndex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg " style={{ height: "75vh" }}>
+          <div className="modal-content">
+            <div className="modal-body h-75">
+              <Carousel showThumbs={false} infiniteLoop={true}>
+                {restaurant.thumb.map((value, index) => {
+                  return (
+                    <div key={index} className="w-100">
+                      <img src={"/imgs/" + value} />
+                    </div>
+                  );
+                })}
+              </Carousel>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         className="modal fade"
         id="exampleModalToggle"
@@ -349,7 +374,9 @@ function Restaurantpage() {
       <section className="container-fluid row justify-content-center align-items-center m-0">
         <div className="container col-12 col-md-11 d-flex  justify-content-center restaurant-main-image position-relative my-4">
           <img src={"/imgs/" + restaurant.image} alt="" />
-          <button className="position-absolute btn fw-bold text-dark">
+          <button className="btn-gallery position-absolute btn fw-bold text-dark"
+          data-bs-toggle="modal"
+          data-bs-target="#slideShow">
             Click to see Image Gallery
           </button>
         </div>
