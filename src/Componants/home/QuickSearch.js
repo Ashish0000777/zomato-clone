@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom"
 function Quicksearch() {
   let [MealTypeList, setMealTypelist] = useState([]);
   let getMealtype = async () => {
-    let Result = await axios.get("https://zomato-db-api.herokuapp.com/api/get-mealType");
+    let Result = await axios.get("https://zomato-api-production.up.railway.app/api/get-mealType");
     let Data = Result.data; 
   
     if (Data.status === true) {

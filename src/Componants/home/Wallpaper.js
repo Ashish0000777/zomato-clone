@@ -4,14 +4,13 @@ import Header from "../Header";
 import { useNavigate } from "react-router-dom";
 
 function Wallpaper() {
-  let selectInput = useRef();
   let navigate = useNavigate()
   let [LocationList, setLocationList] = useState([]);
   let [disabled, SetDisabled] = useState(true);
   let [RestaurantTab , setRestaurantTab] = useState([])
 
   let getLocationList = async () => {
-    let Result = await axios.get("https://zomato-db-api.herokuapp.com/api/get-Location");
+    let Result = await axios.get("https://zomato-api-production.up.railway.app/api/get-Location");
     let data = Result.data;
 
     if (data.status === true) {
@@ -24,7 +23,7 @@ function Wallpaper() {
     let value = event.target.value;
     if (value !== "Select Location") {
       try {
-        let Url = `https://zomato-db-api.herokuapp.com/api/get-Restaurant-by-location-id/${value}`;
+        let Url = `https://zomato-api-production.up.railway.app/api/get-Restaurant-by-location-id/${value}`;
 
         let { data } = await axios.get(Url);
         if (data.status === true) {
@@ -70,7 +69,6 @@ function Wallpaper() {
         <main className="align-items-center flex-column container-fluid row flex-lg-row justify-content-center mb-5">
           <div className="col-sm-12 col-md-7 col-lg-2 bg-transparent card border-0">
             <select
-              ref={selectInput}
               className="text-muted small px-2 py-3 "
               onChange={getLocationId}
             >

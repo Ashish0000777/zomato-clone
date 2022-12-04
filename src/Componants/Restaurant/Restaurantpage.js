@@ -44,7 +44,7 @@ function Restaurantpage() {
 
   let getRestaurant = async () => {
     try {
-      let url = "https://zomato-db-api.herokuapp.com/api/get-Restaurant-by-id/" + id;
+      let url = "https://zomato-api-production.up.railway.app/api/get-Restaurant-by-id/" + id;
       let { data } = await axios.get(url);
       if (data.status === true) {
         setRestaurant({ ...data.result });
@@ -60,7 +60,7 @@ function Restaurantpage() {
   let getMenuItems = async () => {
     try {
       let url =
-        "https://zomato-db-api.herokuapp.com/api/get-menu-items-by-restaurant-id/" + id;
+        "https://zomato-api-production.up.railway.app/api/get-menu-items-by-restaurant-id/" + id;
       let { data } = await axios.get(url);
       console.log(data);
       if (data.status === true) {
@@ -112,7 +112,7 @@ function Restaurantpage() {
     let serverData = {
       amount : total_price
     }
-    let url = "https://zomato-db-api.herokuapp.com/api/payment/gen-order";
+    let url = "https://zomato-api-production.up.railway.app/api/payment/gen-order";
     let { data } = await axios.post(url , serverData);
 
     let order = data.order;
@@ -132,7 +132,7 @@ function Restaurantpage() {
           razorpay_order_id: response.razorpay_order_id,
           razorpay_signature: response.razorpay_signature,
         };
-        let url = "https://zomato-db-api.herokuapp.com/api/payment/verify";
+        let url = "https://zomato-api-production.up.railway.app/api/payment/verify";
         let { data } = await axios.post(url, Send_data);
         if (data.status === true) {
           Swal.fire({
