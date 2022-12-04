@@ -38,7 +38,6 @@ function Restaurantpage() {
   };
   let [userDetails, setUserDetails] = useState(getTokenDetails());
   
- 
   let [restaurant, setRestaurant] = useState({ ...defaultvalue });
   let [total_price, setTotal_price] = useState(0);
 

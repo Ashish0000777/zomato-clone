@@ -37,7 +37,7 @@ function Result() {
       console.log(error);
     }
   };
-
+  
   let getFiltration = (event, type) => {
     let value = event.target.value;
     let _filter = { ...filter };

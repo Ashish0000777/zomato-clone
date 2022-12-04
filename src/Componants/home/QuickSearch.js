@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 
-
 function Quicksearch() {
   let [MealTypeList, setMealTypelist] = useState([]);
   let getMealtype = async () => {
@@ -22,7 +21,6 @@ function Quicksearch() {
   useEffect(() => {
     getMealtype();
   }, []);
-
   return (
     <>
       <section className=" container-fluid">

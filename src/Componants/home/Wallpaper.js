@@ -12,7 +12,7 @@ function Wallpaper() {
   let getLocationList = async () => {
     let Result = await axios.get("https://zomato-api-production.up.railway.app/api/get-Location");
     let data = Result.data;
-
+    
     if (data.status === true) {
       setLocationList([...data.result]);
     } else {
