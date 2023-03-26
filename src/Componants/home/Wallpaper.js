@@ -4,15 +4,17 @@ import Header from "../Header";
 import { useNavigate } from "react-router-dom";
 
 function Wallpaper() {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   let [LocationList, setLocationList] = useState([]);
   let [disabled, SetDisabled] = useState(true);
-  let [RestaurantTab , setRestaurantTab] = useState([])
+  let [RestaurantTab, setRestaurantTab] = useState([]);
 
   let getLocationList = async () => {
-    let Result = await axios.get("https://zomato-api-production.up.railway.app/api/get-Location");
+    let Result = await axios.get(
+      "https://zomato-be.onrender.com/api/get-Location"
+    );
     let data = Result.data;
-    
+
     if (data.status === true) {
       setLocationList([...data.result]);
     } else {
@@ -23,19 +25,18 @@ function Wallpaper() {
     let value = event.target.value;
     if (value !== "Select Location") {
       try {
-        let Url = `https://zomato-api-production.up.railway.app/api/get-Restaurant-by-location-id/${value}`;
+        let Url = `https://zomato-be.onrender.com/api/get-Restaurant-by-location-id/${value}`;
 
         let { data } = await axios.get(Url);
         if (data.status === true) {
           if (data.Result.length !== 0) {
             SetDisabled(false);
-            setRestaurantTab([...data.Result])
+            setRestaurantTab([...data.Result]);
           } else {
-            setRestaurantTab([])
+            setRestaurantTab([]);
             SetDisabled(true);
           }
         }
-       
       } catch (error) {
         alert("server side error");
       }
@@ -51,7 +52,7 @@ function Wallpaper() {
   return (
     <>
       <section className=" container-fluid  section-1 h-auto d-flex flex-column align-items-center justify-content-center section-gap">
-        <Header color="" logo=" logo-hide"/>
+        <Header color="" logo=" logo-hide" />
         <div className="container ">
           <div className=" row d-flex justify-content-center ">
             <div className="brand-logo d-flex justify-content-center ">
@@ -75,7 +76,7 @@ function Wallpaper() {
               <option>Select Location</option>
               {LocationList.map((location, index) => {
                 return (
-                  <option  value={location.location_id} key={index}>
+                  <option value={location.location_id} key={index}>
                     {location.name},{location.city}
                   </option>
                 );
@@ -96,31 +97,31 @@ function Wallpaper() {
                   disabled={disabled}
                 />
               </div>
-              {
-              disabled ? null : (
-                
-              <ul className="search-autocompleate small mt-1 p-2 pb-0 d-md-flex flex-column">
-                { RestaurantTab.map((restaurant,index)=>{
-                  return (
-                <li key={index} className=" d-flex mb-1 border-bottom pt-1 pb-2 pointer" onClick={() => navigate("/restaurant/" + restaurant._id)}>
-                  <img src={"/imgs/" + restaurant.image} alt="" />
-                  <div className=" d-flex justify-content-center align-content-center flex-column ps-2">
-                    <p className=" m-0 h6 fw-bold py-1 pt-0">
-                      {restaurant.name}
-                    </p>
-                    <span className="small text-muted">
-                      {restaurant.locality},{restaurant.city}
-                    </span>
-                  </div>
-                </li>)
-
-                })
-}
-              </ul>
-                
-              )
-
-}
+              {disabled ? null : (
+                <ul className="search-autocompleate small mt-1 p-2 pb-0 d-md-flex flex-column">
+                  {RestaurantTab.map((restaurant, index) => {
+                    return (
+                      <li
+                        key={index}
+                        className=" d-flex mb-1 border-bottom pt-1 pb-2 pointer"
+                        onClick={() =>
+                          navigate("/restaurant/" + restaurant._id)
+                        }
+                      >
+                        <img src={"/imgs/" + restaurant.image} alt="" />
+                        <div className=" d-flex justify-content-center align-content-center flex-column ps-2">
+                          <p className=" m-0 h6 fw-bold py-1 pt-0">
+                            {restaurant.name}
+                          </p>
+                          <span className="small text-muted">
+                            {restaurant.locality},{restaurant.city}
+                          </span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </div>
           </div>
         </main>
