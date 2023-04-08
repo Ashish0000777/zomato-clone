@@ -11,7 +11,7 @@ function Wallpaper() {
 
   let getLocationList = async () => {
     let Result = await axios.get(
-      "https://zomato-be.onrender.com/api/get-Location"
+      "https://zomato-api-production.up.railway.app/api/get-Location"
     );
     let data = Result.data;
 
@@ -25,7 +25,7 @@ function Wallpaper() {
     let value = event.target.value;
     if (value !== "Select Location") {
       try {
-        let Url = `https://zomato-be.onrender.com/api/get-Restaurant-by-location-id/${value}`;
+        let Url = `https://zomato-api-production.up.railway.app/api/get-Restaurant-by-location-id/${value}`;
 
         let { data } = await axios.get(Url);
         if (data.status === true) {
